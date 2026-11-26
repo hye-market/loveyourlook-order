@@ -1,0 +1,14 @@
+# 수파베이스 무료 플랜 7일 정지 방지: 3일마다 DB에 짧은 신호를 보냅니다.
+name: keepalive
+on:
+  schedule:
+    - cron: "29 3 */3 * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ping loveyourlook supabase
+        run: |
+          curl -fsS "https://qsrvuscztormqarzqhak.supabase.co/rest/v1/shops?select=id&limit=1" \
+            -H "apikey: sb_publishable_c3GYm0KeVWU4FXfUGtYslA_--O32Rj6" -o /dev/null -w "%{http_code}\n"
